@@ -1,7 +1,7 @@
-#pal
+#palindromo
 import sys
 
-#funcion que checa si las letras en los indices son iguales
+#funcion que verifica si las letras en los indices son iguales
 def check(primero, ultimo):
 	if(primero==ultimo):
 		return True

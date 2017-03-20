@@ -1,11 +1,17 @@
-#3sat
 import random
 from random import choice
 import string
 
+#parametros
+lineas=20
+num_variables=10
+variables=[]
+for y in range(0,num_variables):
+	variables.append("x"+str(y))
+
 #Funcion que construye el problema 3satDNF
 def conscnf(lineas, variables):
-	f=open('cnf.txt', 'w')
+	f=open('dnf.txt', 'w')
 	for x in range(0,lineas):
 		linea=random.sample(variables, 3)
 		for y in range(0,3):
@@ -29,8 +35,9 @@ def asignacion(variables,num_variables):
 
 #Funcion que evalua los valores de asignacion a el problema y determina el resultado
 def eval():
-	l=open("cnf.txt","r")
+	l=open("dnf.txt","r")
 	print(" \nproblema:")
+	resultado=False
 	for linea in l:
 		evaluacion=linea[:len(linea)-2].split("	")
 		print(evaluacion)
@@ -38,25 +45,19 @@ def eval():
 			componente=evaluacion[y].split(",")
 			if(componente[0][0]!="!"):
 				hola=componente[0] in asi
-				if(hola==True):
-					resultado=True
+				if(hola==False):
 					break
 			if(componente[0][0]=="!"):
 				hola=componente[0][1:] in asi
-				if(hola==False):
-					resultado=True
+				if(hola==True):
 					break
-			resultado=False
-		if(resultado==False):
-			return False
-	return True
+			if(y==len(evaluacion)-1):
+				resultado=True
+		if(resultado==True):
+			return resultado
+	return resultado
 
-#parametros
-lineas=2
-num_variables=10
-variables=[]
-for y in range(0,num_variables):
-	variables.append("x"+str(y))
+
 
 #escritura 
 conscnf(lineas, variables)
@@ -66,7 +67,7 @@ asignacion(variables,num_variables)
 f=open("asi.txt","r")
 asi=f.readline()
 asi=set(asi[:len(asi)-1].split(" "))
-print("instancia: ",asi)
+print("instancia (variables con valor verdadero): ",asi)
 f.closed
 
 #evaluacion

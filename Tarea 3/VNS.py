@@ -160,7 +160,7 @@ def problema():
 
 
 
-#Funcion que evalua los valores de asignacion a el problema y determina el resultado 0 es falso 1 es verdadero
+#Funcion que evalua los valores de asignacion a el problema y determina el resultado en cantidad de clausulas cumplidas
 def eval(prueba):
 	l=open("cnfmeta.txt","r")
 
